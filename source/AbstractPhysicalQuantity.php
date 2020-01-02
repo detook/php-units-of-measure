@@ -246,7 +246,7 @@ abstract class AbstractPhysicalQuantity implements PhysicalQuantityInterface
         }
         return false;
     }
-    
+
     /**
      * @see \PhpUnitsOfMeasure\PhysicalQuantityInterface::listAllUnits
      */
@@ -288,5 +288,27 @@ abstract class AbstractPhysicalQuantity implements PhysicalQuantityInterface
     public function getOriginalUnit()
     {
         return $this->originalUnit;
+    }
+
+    /**
+     * Real original unit name, not alias
+     *
+     * @return string|null
+     */
+    public function getOriginalUnitName()
+    {
+        // If this class hasn't been initialized yet, do so now
+        if (!is_array(static::$unitDefinitions)) {
+            static::$unitDefinitions = [];
+            static::initialize();
+        }
+
+        foreach (static::$unitDefinitions as $unitOfMeasure) {
+            if ($unitOfMeasure->isAliasOf($this->getOriginalUnit())) {
+                return $unitOfMeasure->getName();
+            }
+        }
+
+        return null;
     }
 }
