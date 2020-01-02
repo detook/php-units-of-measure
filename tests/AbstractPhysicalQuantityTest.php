@@ -273,6 +273,10 @@ class AbstractPhysicalQuantityTest extends PHPUnit_Framework_TestCase
         $unit = 'uvee';
         $physicalQuantity = new Wonkicity($value, $unit);
         $this->assertEquals('u', $physicalQuantity->getOriginalUnitName());
+
+        $nameUnit = 'u';
+        $physicalQuantityName = new Wonkicity($value, $nameUnit);
+        $this->assertEquals('u', $physicalQuantityName->getOriginalUnitName());
     }
 
     /**

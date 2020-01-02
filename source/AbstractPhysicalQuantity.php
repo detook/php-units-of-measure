@@ -304,7 +304,7 @@ abstract class AbstractPhysicalQuantity implements PhysicalQuantityInterface
         }
 
         foreach (static::$unitDefinitions as $unitOfMeasure) {
-            if ($unitOfMeasure->isAliasOf($this->getOriginalUnit())) {
+            if ($this->getOriginalUnit() === $unitOfMeasure->getName() || $unitOfMeasure->isAliasOf($this->getOriginalUnit())) {
                 return $unitOfMeasure->getName();
             }
         }
